@@ -11,6 +11,10 @@ body{background:var(--bg);color:var(--text);font-family:monospace;font-size:14px
 header{background:rgba(13,15,20,.95);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-badge{font-size:11px;color:var(--muted);padding:5px 10px;border:1px solid var(--border);border-radius:6px}
+.btn-small{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-family:monospace;font-size:11px;padding:5px 10px}
+.btn-small:hover{border-color:var(--accent2);color:var(--accent2)}
 main{max-width:1200px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start}
 .stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px}
@@ -25,8 +29,9 @@ label{display:block;font-size:11px;text-transform:uppercase;color:var(--muted);m
 input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:monospace;font-size:13px;padding:9px 11px;outline:none}
 input:focus,select:focus{border-color:var(--accent2)}
 select option{background:var(--surface2)}
+.hint{font-size:10px;color:var(--muted);margin-top:3px}
 .photo-upload{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.photo-preview{width:56px;height:56px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);object-fit:cover;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;overflow:hidden}
+.photo-preview{width:56px;height:56px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;overflow:hidden}
 .photo-preview img{width:100%;height:100%;object-fit:cover}
 input[type=file]{font-size:11px;color:var(--muted)}
 .section-label{font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;border-top:1px solid var(--border);padding-top:14px}
@@ -47,7 +52,6 @@ tbody tr{border-bottom:1px solid var(--border)}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:var(--surface2)}
 tbody td{padding:11px 14px;font-size:13px;white-space:nowrap}
-.avatar-sm{width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--surface2);display:inline-block;vertical-align:middle;margin-right:8px}
 .badge{font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid var(--border);color:var(--accent2);background:rgba(123,97,255,.08)}
 .badge-statut{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
 .badge-statut.actif{background:rgba(79,255,176,.1);color:var(--accent);border:1px solid rgba(79,255,176,.3)}
@@ -61,7 +65,7 @@ tbody td{padding:11px 14px;font-size:13px;white-space:nowrap}
 footer{border-top:1px solid var(--border);padding:12px 32px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;margin-top:20px}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
 .modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .modal-close{background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
 .profile-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;background:var(--surface2);display:block;margin:0 auto 12px}
@@ -70,35 +74,74 @@ footer{border-top:1px solid var(--border);padding:12px 32px;color:var(--muted);f
 .profile-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
 .profile-row:last-child{border-bottom:none}
 .profile-row span:first-child{color:var(--muted)}
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;width:340px}
+.login-title{font-weight:800;font-size:18px;text-align:center;margin-bottom:4px}
+.login-sub{font-size:11px;color:var(--muted);text-align:center;margin-bottom:24px}
+.login-hint{font-size:10px;color:var(--muted);margin-top:14px;text-align:center;line-height:1.6}
+.users-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.users-table th{text-align:left;padding:6px 8px;color:var(--muted);font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.users-table td{padding:7px 8px;border-bottom:1px solid var(--border)}
+#appScreen{display:none}
 @media(max-width:768px){main{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-title">🎓 Student Manager</div>
+    <div class="login-sub">Connexion à votre espace</div>
+    <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@univ.tn" /></div>
+    <div class="form-group"><label>Mot de passe</label><input type="password" id="loginPassword" placeholder="••••••••" /></div>
+    <div id="loginMsg" class="toast"></div>
+    <button class="btn" onclick="doLogin()">Se connecter</button>
+    <div class="login-hint">Compte admin par défaut :<br>admin@univ.tn / Admin@2026</div>
+  </div>
+</div>
+
+<div id="appScreen">
 <header>
   <div class="logo"><span class="dot"></span> Student Manager</div>
-  <span style="font-size:11px;color:var(--muted)">v1.2.0</span>
+  <div class="header-right">
+    <button class="btn-small" id="accountsBtn" style="display:none" onclick="openAccounts()">👥 Comptes</button>
+    <span class="user-badge" id="userBadge"></span>
+    <button class="btn-small" onclick="logout()">Déconnexion</button>
+  </div>
 </header>
 <main>
-  <div class="stats">
+  <div class="stats" id="statsRow">
     <div class="stat-card"><div class="stat-label">Total étudiants</div><div class="stat-value" id="statTotal">—</div></div>
     <div class="stat-card"><div class="stat-label">Filières</div><div class="stat-value" id="statFilieres">—</div></div>
     <div class="stat-card"><div class="stat-label">Niveaux</div><div class="stat-value" id="statNiveaux">—</div></div>
   </div>
-  <aside>
+
+  <aside id="adminOnlyPanel" style="display:none">
     <div class="panel">
       <div class="panel-title" id="panelTitle">✦ Ajouter un étudiant</div>
       <div id="matriculeInfo"></div>
-
       <div class="photo-upload">
         <div class="photo-preview" id="photoPreview">Photo</div>
         <input type="file" id="photoInput" accept="image/*" onchange="onPhotoChange(event)" />
       </div>
-
-      <div class="form-group"><label>Nom</label><input type="text" id="nom" placeholder="Dupont" /></div>
-      <div class="form-group"><label>Prénom</label><input type="text" id="prenom" placeholder="Alice" /></div>
-      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="alice@univ.tn" /></div>
+      <div class="form-group"><label>Nom</label><input type="text" id="nom" /></div>
+      <div class="form-group"><label>Prénom</label><input type="text" id="prenom" /></div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="exemple@gmail.com" />
+        <div class="hint">Format valide : nom@domaine.com — sans espace</div>
+      </div>
       <div class="form-row">
-        <div class="form-group"><label>Filière</label><input type="text" id="filiere" placeholder="Informatique" /></div>
+        <div class="form-group">
+          <label>Filière</label>
+          <select id="filiere">
+            <option value="">— choisir —</option>
+            <option>Informatique</option>
+            <option>Business</option>
+            <option>Électrique</option>
+            <option>Mécanique</option>
+          </select>
+        </div>
         <div class="form-group"><label>Niveau</label>
           <select id="niveau"><option value="">—</option><option>L1</option><option>L2</option><option>L3</option><option>M1</option><option>M2</option></select>
         </div>
@@ -106,26 +149,42 @@ footer{border-top:1px solid var(--border);padding:12px 32px;color:var(--muted);f
       <div class="form-group"><label>Statut</label>
         <select id="statut"><option>Actif</option><option>Suspendu</option><option>Diplômé</option><option>Abandonné</option></select>
       </div>
-
       <div class="section-label">Informations personnelles</div>
       <div class="form-row">
         <div class="form-group"><label>Date de naissance</label><input type="date" id="date_naissance" /></div>
-        <div class="form-group"><label>Téléphone</label><input type="text" id="telephone" placeholder="+216 ..." /></div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="text" id="telephone" maxlength="8" inputmode="numeric" placeholder="12345678" />
+          <div class="hint">8 chiffres</div>
+        </div>
       </div>
-      <div class="form-group"><label>Adresse</label><input type="text" id="adresse" placeholder="Rue, ville" /></div>
-
+      <div class="form-group">
+        <label>Adresse (gouvernorat)</label>
+        <select id="adresse">
+          <option value="">— choisir —</option>
+          <option>Ariana</option><option>Béja</option><option>Ben Arous</option><option>Bizerte</option>
+          <option>Gabès</option><option>Gafsa</option><option>Jendouba</option><option>Kairouan</option>
+          <option>Kasserine</option><option>Kébili</option><option>Le Kef</option><option>Mahdia</option>
+          <option>La Manouba</option><option>Médenine</option><option>Monastir</option><option>Nabeul</option>
+          <option>Sfax</option><option>Sidi Bouzid</option><option>Siliana</option><option>Sousse</option>
+          <option>Tataouine</option><option>Tozeur</option><option>Tunis</option><option>Zaghouan</option>
+        </select>
+      </div>
       <div class="section-label">Contact d'urgence</div>
       <div class="form-row">
-        <div class="form-group"><label>Nom</label><input type="text" id="contact_urgence_nom" placeholder="Nom du contact" /></div>
-        <div class="form-group"><label>Téléphone</label><input type="text" id="contact_urgence_telephone" placeholder="+216 ..." /></div>
+        <div class="form-group"><label>Nom</label><input type="text" id="contact_urgence_nom" /></div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="text" id="contact_urgence_telephone" maxlength="8" inputmode="numeric" placeholder="12345678" />
+        </div>
       </div>
-
       <div id="msg" class="toast"></div>
       <button class="btn" id="saveBtn" onclick="saveStudent()">+ Ajouter</button>
       <button id="cancelBtn" onclick="cancelEdit()">Annuler la modification</button>
     </div>
   </aside>
-  <section>
+
+  <section id="tableSection" style="display:none">
     <div class="table-wrap">
       <div class="table-head">
         <span>Liste des étudiants</span>
@@ -137,8 +196,47 @@ footer{border-top:1px solid var(--border);padding:12px 32px;color:var(--muted);f
       </table>
     </div>
   </section>
+
+  <section id="studentProfileSection" style="display:none;grid-column:1/-1;max-width:420px">
+    <div class="panel">
+      <div class="panel-title">Mon profil</div>
+      <img class="profile-photo" id="myPhoto" src="" alt="" />
+      <div class="profile-name" id="myName"></div>
+      <div class="profile-matricule" id="myMatricule"></div>
+      <div class="profile-row"><span>Email</span><span id="myEmail"></span></div>
+      <div class="profile-row"><span>Filière</span><span id="myFiliere"></span></div>
+      <div class="profile-row"><span>Niveau</span><span id="myNiveau"></span></div>
+      <div class="profile-row"><span>Statut</span><span id="myStatut"></span></div>
+      <div class="section-label">Modifier mes coordonnées</div>
+      <div class="form-group">
+        <label>Téléphone</label>
+        <input type="text" id="myTelephone" maxlength="8" inputmode="numeric" placeholder="12345678" />
+        <div class="hint">8 chiffres</div>
+      </div>
+      <div class="form-group">
+        <label>Adresse (gouvernorat)</label>
+        <select id="myAdresse">
+          <option value="">— choisir —</option>
+          <option>Ariana</option><option>Béja</option><option>Ben Arous</option><option>Bizerte</option>
+          <option>Gabès</option><option>Gafsa</option><option>Jendouba</option><option>Kairouan</option>
+          <option>Kasserine</option><option>Kébili</option><option>Le Kef</option><option>Mahdia</option>
+          <option>La Manouba</option><option>Médenine</option><option>Monastir</option><option>Nabeul</option>
+          <option>Sfax</option><option>Sidi Bouzid</option><option>Siliana</option><option>Sousse</option>
+          <option>Tataouine</option><option>Tozeur</option><option>Tunis</option><option>Zaghouan</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Contact urgence — nom</label><input type="text" id="myContactNom" /></div>
+      <div class="form-group">
+        <label>Contact urgence — téléphone</label>
+        <input type="text" id="myContactTel" maxlength="8" inputmode="numeric" placeholder="12345678" />
+      </div>
+      <div id="myMsg" class="toast"></div>
+      <button class="btn" onclick="saveMyProfile()">Enregistrer</button>
+    </div>
+  </section>
 </main>
-<footer><span>Student Manager — 3-Tiers</span><span id="apiStatus">Connexion…</span></footer>
+<footer><span>Student Manager — 3-Tiers + Auth</span><span id="apiStatus">Connecté</span></footer>
+</div>
 
 <div class="modal-overlay" id="profileModal" onclick="if(event.target===this)closeProfile()">
   <div class="modal">
@@ -157,36 +255,111 @@ footer{border-top:1px solid var(--border);padding:12px 32px;color:var(--muted);f
   </div>
 </div>
 
+<div class="modal-overlay" id="accountsModal" onclick="if(event.target===this)closeAccounts()">
+  <div class="modal">
+    <div class="modal-header"><span style="font-weight:700;font-size:13px">Gestion des comptes</span><button class="modal-close" onclick="closeAccounts()">✕</button></div>
+    <div class="form-group"><label>Nom et Prénom</label><input type="text" id="newUserNom" /></div>
+    <div class="form-group"><label>Email</label><input type="email" id="newUserEmail" placeholder="exemple@gmail.com" /></div>
+    <div class="form-group"><label>Mot de passe</label><input type="password" id="newUserPassword" /></div>
+    <div class="form-row">
+      <div class="form-group"><label>Rôle</label>
+        <select id="newUserRole" onchange="toggleStudentLink()"><option>Admin</option><option>Professeur</option><option selected>Etudiant</option></select>
+      </div>
+      <div class="form-group" id="studentLinkGroup"><label>Lier à l'étudiant</label>
+        <select id="newUserStudentId"></select>
+      </div>
+    </div>
+    <div id="newUserMsg" class="toast"></div>
+    <button class="btn" onclick="createUser()">Créer le compte</button>
+    <div class="section-label">Comptes existants</div>
+    <table class="users-table"><thead><tr><th>Nom</th><th>Email</th><th>Rôle</th></tr></thead><tbody id="usersTbody"></tbody></table>
+  </div>
+</div>
+
 <script>
 const API='/api';
+let token = localStorage.getItem('token');
+let currentUser = JSON.parse(localStorage.getItem('user') || 'null');
 let all=[];
 let editingId=null;
 let photoData=null;
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE_REGEX = /^[0-9]{8}$/;
+
+function authHeaders(){ return token ? {'Authorization':'Bearer '+token} : {}; }
+
+async function apiFetch(path, opts={}){
+  const headers = Object.assign({'Content-Type':'application/json'}, authHeaders(), opts.headers||{});
+  const res = await fetch(API+path, Object.assign({}, opts, {headers}));
+  if(res.status === 401){ logout(); throw new Error('Session expirée'); }
+  return res;
+}
+
+async function doLogin(){
+  const msg = document.getElementById('loginMsg');
+  msg.className='toast';
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if(!email || !password){ msg.textContent='Email et mot de passe requis.'; msg.className='toast error'; return; }
+  try{
+    const res = await fetch(API+'/auth/login', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email,password})});
+    const data = await res.json();
+    if(!res.ok){ msg.textContent = data.error || 'Erreur de connexion'; msg.className='toast error'; return; }
+    token = data.access_token;
+    currentUser = data.user;
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(currentUser));
+    showApp();
+  }catch(e){ msg.textContent='Erreur réseau'; msg.className='toast error'; }
+}
+
+function logout(){
+  token=null; currentUser=null;
+  localStorage.removeItem('token'); localStorage.removeItem('user');
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('appScreen').style.display='none';
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPassword').value='';
+}
+
+function showApp(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('appScreen').style.display='block';
+  document.getElementById('userBadge').textContent = currentUser.nom + ' · ' + currentUser.role;
+  applyRoleUI();
+  if(currentUser.role === 'Etudiant'){ loadOwnProfile(); } else { load(); }
+}
+
+function applyRoleUI(){
+  const isAdmin = currentUser.role === 'Admin';
+  const isStaff = isAdmin || currentUser.role === 'Professeur';
+  document.getElementById('adminOnlyPanel').style.display = isAdmin ? 'block' : 'none';
+  document.getElementById('tableSection').style.display = isStaff ? 'block' : 'none';
+  document.getElementById('statsRow').style.display = isStaff ? 'grid' : 'none';
+  document.getElementById('studentProfileSection').style.display = currentUser.role==='Etudiant' ? 'block' : 'none';
+  document.getElementById('accountsBtn').style.display = isAdmin ? 'inline-block' : 'none';
+}
+
+// ── Vue Admin / Professeur ──────────────────────────────────────────────
 async function load(){
   try{
-    const [students,stats]=await Promise.all([
-      fetch(API+'/students').then(r=>r.json()),
-      fetch(API+'/stats').then(r=>r.json())
-    ]);
-    all=students;
-    renderTable(students);
+    const [studentsRes, statsRes] = await Promise.all([apiFetch('/students'), apiFetch('/stats')]);
+    all = await studentsRes.json();
+    const stats = await statsRes.json();
+    renderTable(all);
     document.getElementById('statTotal').textContent=stats.total;
     document.getElementById('statFilieres').textContent=stats.par_filiere.length;
     document.getElementById('statNiveaux').textContent=stats.par_niveau.length;
-    document.getElementById('apiStatus').textContent='● API connectée';
-    document.getElementById('apiStatus').style.color='var(--accent)';
-  }catch(e){
-    document.getElementById('apiStatus').textContent='● API hors ligne';
-    document.getElementById('apiStatus').style.color='var(--danger)';
-    renderTable([]);
-  }
+  }catch(e){ renderTable([]); }
 }
 
 function statutClass(s){const m={'Actif':'actif','Suspendu':'suspendu','Diplômé':'diplome','Abandonné':'abandonne'};return m[s]||'actif'}
 
 function renderTable(list){
   const tb=document.getElementById('tbody');
+  const isAdmin = currentUser.role === 'Admin';
+  const isStaff = isAdmin || currentUser.role === 'Professeur';
   if(!list.length){tb.innerHTML='<tr><td colspan="8"><div class="empty">Aucun étudiant</div></td></tr>';return}
   tb.innerHTML=list.map((s,i)=>`<tr>
     <td style="color:var(--muted)">${String(i+1).padStart(2,'0')}</td>
@@ -198,14 +371,14 @@ function renderTable(list){
     <td><span class="badge-statut ${statutClass(s.statut)}">${s.statut||'Actif'}</span></td>
     <td>
       <button class="btn-icon" onclick="openProfile(${s.id})" title="Voir profil">👁</button>
-      <button class="btn-icon" onclick="openEditById(${s.id})" title="Modifier">✎</button>
-      <button class="btn-icon btn-del" onclick="del(${s.id},this)" title="Supprimer">✕</button>
+      ${isStaff ? `<button class="btn-icon" onclick="openEditById(${s.id})" title="Modifier">✎</button>` : ''}
+      ${isAdmin ? `<button class="btn-icon btn-del" onclick="del(${s.id},this)" title="Supprimer">✕</button>` : ''}
     </td>
   </tr>`).join('');
 }
 
 async function openProfile(id){
-  const r = await fetch(API+'/students/'+id);
+  const r = await apiFetch('/students/'+id);
   if(!r.ok) return;
   const s = await r.json();
   document.getElementById('pPhoto').src = s.photo || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><rect width="90" height="90" fill="%231a1e2b"/></svg>';
@@ -224,18 +397,14 @@ async function openProfile(id){
 function closeProfile(){document.getElementById('profileModal').classList.remove('open')}
 
 function onPhotoChange(e){
-  const file=e.target.files[0];
-  if(!file) return;
+  const file=e.target.files[0]; if(!file) return;
   const reader=new FileReader();
-  reader.onload=function(ev){
-    photoData=ev.target.result;
-    document.getElementById('photoPreview').innerHTML=`<img src="${photoData}">`;
-  };
+  reader.onload=function(ev){ photoData=ev.target.result; document.getElementById('photoPreview').innerHTML=`<img src="${photoData}">`; };
   reader.readAsDataURL(file);
 }
 
 async function openEditById(id){
-  const r = await fetch(API+'/students/'+id);
+  const r = await apiFetch('/students/'+id);
   if(!r.ok) return;
   const s = await r.json();
   editingId=s.id;
@@ -254,21 +423,18 @@ async function openEditById(id){
   document.getElementById('photoPreview').innerHTML = photoData ? `<img src="${photoData}">` : 'Photo';
   document.getElementById('panelTitle').textContent='✎ Modifier l\'étudiant';
   const info=document.getElementById('matriculeInfo');
-  info.textContent='Matricule : '+(s.matricule||'—');
-  info.style.display='block';
+  info.textContent='Matricule : '+(s.matricule||'—'); info.style.display='block';
   document.getElementById('saveBtn').textContent='Enregistrer les modifications';
   document.getElementById('cancelBtn').style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function cancelEdit(){
-  editingId=null;
-  photoData=null;
-  ['nom','prenom','email','filiere','date_naissance','telephone','adresse','contact_urgence_nom','contact_urgence_telephone'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('niveau').value='';
-  document.getElementById('statut').value='Actif';
-  document.getElementById('photoPreview').innerHTML='Photo';
-  document.getElementById('photoInput').value='';
+  editingId=null; photoData=null;
+  ['nom','prenom','email','date_naissance','telephone','contact_urgence_nom','contact_urgence_telephone'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('filiere').value=''; document.getElementById('adresse').value='';
+  document.getElementById('niveau').value=''; document.getElementById('statut').value='Actif';
+  document.getElementById('photoPreview').innerHTML='Photo'; document.getElementById('photoInput').value='';
   document.getElementById('panelTitle').textContent='✦ Ajouter un étudiant';
   document.getElementById('matriculeInfo').style.display='none';
   document.getElementById('saveBtn').textContent='+ Ajouter';
@@ -277,42 +443,44 @@ function cancelEdit(){
 }
 
 async function saveStudent(){
-  const msg=document.getElementById('msg');
-  msg.className='toast';
+  const msg=document.getElementById('msg'); msg.className='toast';
   const payload={
-    nom:document.getElementById('nom').value.trim(),
-    prenom:document.getElementById('prenom').value.trim(),
-    email:document.getElementById('email').value.trim(),
-    filiere:document.getElementById('filiere').value.trim(),
-    niveau:document.getElementById('niveau').value,
-    statut:document.getElementById('statut').value,
+    nom:document.getElementById('nom').value.trim(), prenom:document.getElementById('prenom').value.trim(),
+    email:document.getElementById('email').value.trim(), filiere:document.getElementById('filiere').value,
+    niveau:document.getElementById('niveau').value, statut:document.getElementById('statut').value,
     date_naissance:document.getElementById('date_naissance').value,
-    telephone:document.getElementById('telephone').value.trim(),
-    adresse:document.getElementById('adresse').value.trim(),
+    telephone:document.getElementById('telephone').value.trim(), adresse:document.getElementById('adresse').value,
     contact_urgence_nom:document.getElementById('contact_urgence_nom').value.trim(),
     contact_urgence_telephone:document.getElementById('contact_urgence_telephone').value.trim(),
     photo:photoData
   };
   if(!payload.nom||!payload.prenom||!payload.email||!payload.filiere||!payload.niveau){
-    msg.textContent='Remplir tous les champs obligatoires.';msg.className='toast error';return;
+    msg.textContent='Remplir tous les champs obligatoires.'; msg.className='toast error'; return;
+  }
+  if(!EMAIL_REGEX.test(payload.email)){
+    msg.textContent='Email invalide. Format attendu : nom@domaine.com'; msg.className='toast error'; return;
+  }
+  if(payload.telephone && !PHONE_REGEX.test(payload.telephone)){
+    msg.textContent='Téléphone invalide. 8 chiffres requis (format tunisien).'; msg.className='toast error'; return;
+  }
+  if(payload.contact_urgence_telephone && !PHONE_REGEX.test(payload.contact_urgence_telephone)){
+    msg.textContent="Téléphone du contact d'urgence invalide. 8 chiffres requis."; msg.className='toast error'; return;
   }
   try{
-    const url=editingId?API+'/students/'+editingId:API+'/students';
+    const url=editingId?'/students/'+editingId:'/students';
     const method=editingId?'PUT':'POST';
-    const r=await fetch(url,{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const r=await apiFetch(url,{method,body:JSON.stringify(payload)});
     const d=await r.json();
-    if(!r.ok){msg.textContent=d.error;msg.className='toast error';return}
-    msg.textContent=editingId?'Étudiant modifié !':'Étudiant ajouté !';
-    msg.className='toast success';
-    cancelEdit();
-    load();
-  }catch(e){msg.textContent='Erreur réseau';msg.className='toast error'}
+    if(!r.ok){ msg.textContent=d.error; msg.className='toast error'; return; }
+    msg.textContent=editingId?'Étudiant modifié !':'Étudiant ajouté !'; msg.className='toast success';
+    cancelEdit(); load();
+  }catch(e){ msg.textContent='Erreur réseau'; msg.className='toast error'; }
 }
 
 async function del(id,btn){
   if(!confirm('Supprimer cet étudiant ?'))return;
   btn.disabled=true;
-  await fetch(API+'/students/'+id,{method:'DELETE'});
+  await apiFetch('/students/'+id,{method:'DELETE'});
   load();
 }
 
@@ -321,8 +489,94 @@ function filterTable(){
   renderTable(all.filter(s=>(s.nom+s.prenom+s.email+s.filiere+s.niveau+(s.matricule||'')+(s.statut||'')).toLowerCase().includes(q)));
 }
 
-load();
-setInterval(load,30000);
+// ── Vue Étudiant (profil personnel) ─────────────────────────────────────
+async function loadOwnProfile(){
+  const r = await apiFetch('/auth/me');
+  const data = await r.json();
+  if(!data.student){ return; }
+  const s = data.student;
+  document.getElementById('myPhoto').src = s.photo || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90"><rect width="90" height="90" fill="%231a1e2b"/></svg>';
+  document.getElementById('myName').textContent = s.nom+' '+s.prenom;
+  document.getElementById('myMatricule').textContent = s.matricule || '—';
+  document.getElementById('myEmail').textContent = s.email;
+  document.getElementById('myFiliere').textContent = s.filiere;
+  document.getElementById('myNiveau').textContent = s.niveau;
+  document.getElementById('myStatut').textContent = s.statut;
+  document.getElementById('myTelephone').value = s.telephone || '';
+  document.getElementById('myAdresse').value = s.adresse || '';
+  document.getElementById('myContactNom').value = s.contact_urgence_nom || '';
+  document.getElementById('myContactTel').value = s.contact_urgence_telephone || '';
+  window._myStudentId = s.id;
+}
+
+async function saveMyProfile(){
+  const msg = document.getElementById('myMsg'); msg.className='toast';
+  const telephone = document.getElementById('myTelephone').value.trim();
+  const contactTel = document.getElementById('myContactTel').value.trim();
+  if(telephone && !PHONE_REGEX.test(telephone)){
+    msg.textContent='Téléphone invalide. 8 chiffres requis.'; msg.className='toast error'; return;
+  }
+  if(contactTel && !PHONE_REGEX.test(contactTel)){
+    msg.textContent="Téléphone du contact d'urgence invalide. 8 chiffres requis."; msg.className='toast error'; return;
+  }
+  const payload = {
+    telephone: telephone,
+    adresse: document.getElementById('myAdresse').value,
+    contact_urgence_nom: document.getElementById('myContactNom').value.trim(),
+    contact_urgence_telephone: contactTel
+  };
+  const r = await apiFetch('/students/'+window._myStudentId, {method:'PUT', body: JSON.stringify(payload)});
+  const d = await r.json();
+  if(!r.ok){ msg.textContent=d.error; msg.className='toast error'; return; }
+  msg.textContent='Profil mis à jour !'; msg.className='toast success';
+}
+
+// ── Gestion des comptes (Admin) ──────────────────────────────────────────
+async function openAccounts(){
+  document.getElementById('accountsModal').classList.add('open');
+  const studentsRes = await apiFetch('/students');
+  const students = await studentsRes.json();
+  const sel = document.getElementById('newUserStudentId');
+  sel.innerHTML = students.map(s=>`<option value="${s.id}">${s.nom} ${s.prenom} (${s.matricule||'—'})</option>`).join('');
+  toggleStudentLink();
+  refreshUsersList();
+}
+function closeAccounts(){ document.getElementById('accountsModal').classList.remove('open'); }
+function toggleStudentLink(){
+  const role = document.getElementById('newUserRole').value;
+  document.getElementById('studentLinkGroup').style.display = role==='Etudiant' ? 'block' : 'none';
+}
+async function refreshUsersList(){
+  const r = await apiFetch('/auth/users');
+  const users = await r.json();
+  document.getElementById('usersTbody').innerHTML = users.map(u=>`<tr><td>${u.nom}</td><td>${u.email}</td><td>${u.role}</td></tr>`).join('');
+}
+async function createUser(){
+  const msg = document.getElementById('newUserMsg'); msg.className='toast';
+  const email = document.getElementById('newUserEmail').value.trim();
+  if(!EMAIL_REGEX.test(email)){
+    msg.textContent='Email invalide. Format attendu : nom@domaine.com'; msg.className='toast error'; return;
+  }
+  const payload = {
+    nom: document.getElementById('newUserNom').value.trim(),
+    email: email,
+    password: document.getElementById('newUserPassword').value,
+    role: document.getElementById('newUserRole').value,
+    student_id: document.getElementById('newUserRole').value === 'Etudiant' ? document.getElementById('newUserStudentId').value : null
+  };
+  if(!payload.nom||!payload.email||!payload.password){ msg.textContent='Tous les champs sont requis.'; msg.className='toast error'; return; }
+  const r = await apiFetch('/auth/register', {method:'POST', body: JSON.stringify(payload)});
+  const d = await r.json();
+  if(!r.ok){ msg.textContent=d.error; msg.className='toast error'; return; }
+  msg.textContent='Compte créé !'; msg.className='toast success';
+  document.getElementById('newUserNom').value='';
+  document.getElementById('newUserEmail').value='';
+  document.getElementById('newUserPassword').value='';
+  refreshUsersList();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+if(token && currentUser){ showApp(); } else { document.getElementById('loginScreen').style.display='flex'; }
 </script>
 </body>
 </html>
