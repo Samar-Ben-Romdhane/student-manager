@@ -34,7 +34,7 @@ def _seed_default_admin():
     from .models import User
     if User.query.count() == 0:
         admin = User(nom='Administrateur', email='admin@univ.tn', role='Admin')
-        admin.set_password('Admin@2026')
+        admin.set_password('Admin@2026')  # nosec B105 - compte de démarrage, à changer en prod
         db.session.add(admin)
         db.session.commit()
         print('>>> Compte admin créé : admin@univ.tn / Admin@2026 (à changer en prod !)')
