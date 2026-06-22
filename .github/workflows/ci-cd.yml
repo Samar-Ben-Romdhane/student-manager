@@ -88,6 +88,7 @@ jobs:
           format: table
           severity: CRITICAL,HIGH
           ignore-unfixed: true
+          trivyignores: .trivyignore
           exit-code: '1'
 
       - name: Scan frontend image with Trivy
@@ -97,6 +98,7 @@ jobs:
           format: table
           severity: CRITICAL,HIGH
           ignore-unfixed: true
+          trivyignores: .trivyignore
           exit-code: '1'
 
       - name: Push backend image
