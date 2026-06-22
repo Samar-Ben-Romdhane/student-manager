@@ -101,7 +101,8 @@ def update_student(current_user, student_id):
     if 'telephone' in data: student.telephone = data.get('telephone', '').strip() or None
     if 'adresse' in data: student.adresse = data.get('adresse', '').strip() or None
     if 'contact_urgence_nom' in data: student.contact_urgence_nom = data.get('contact_urgence_nom', '').strip() or None
-    if 'contact_urgence_telephone' in data: student.contact_urgence_telephone = data.get('contact_urgence_telephone', '').strip() or None
+    if 'contact_urgence_telephone' in data:
+        student.contact_urgence_telephone = data.get('contact_urgence_telephone', '').strip() or None
     if 'photo' in data and data['photo']: student.photo = data['photo']
 
     db.session.commit()
