@@ -1,0 +1,112 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+env:
+  BACKEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/student-manager-backend
+  FRONTEND_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/student-manager-frontend
+
+jobs:
+
+  lint-and-test:
+    name: Lint & Tests (Backend)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Lint with flake8
+        working-directory: backend
+        run: flake8 app wsgi.py
+
+      - name: Run tests with pytest
+        working-directory: backend
+        run: pytest tests/ -v --tb=short
+
+  sast-scan:
+    name: SAST Scan (Bandit)
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Bandit
+        run: pip install bandit
+
+      - name: Run Bandit SAST scan
+        working-directory: backend
+        run: bandit -r app -ll -f txt
+        continue-on-error: true
+
+  build-and-push:
+    name: Build, Scan & Push Docker Images
+    runs-on: ubuntu-latest
+    needs: [ lint-and-test, sast-scan ]
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build backend image
+        run: |
+          docker build -t ${{ env.BACKEND_IMAGE }}:${{ github.sha }} \
+                        -t ${{ env.BACKEND_IMAGE }}:latest ./backend
+
+      - name: Build frontend image
+        run: |
+          docker build -t ${{ env.FRONTEND_IMAGE }}:${{ github.sha }} \
+                        -t ${{ env.FRONTEND_IMAGE }}:latest ./frontend
+
+      - name: Scan backend image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          format: table
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          trivyignores: .trivyignore
+          exit-code: '1'
+
+      - name: Scan frontend image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          format: table
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          trivyignores: .trivyignore
+          exit-code: '1'
+
+      - name: Push backend image
+        run: |
+          docker push ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.BACKEND_IMAGE }}:latest
+
+      - name: Push frontend image
+        run: |
+          docker push ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
+          docker push ${{ env.FRONTEND_IMAGE }}:latest
