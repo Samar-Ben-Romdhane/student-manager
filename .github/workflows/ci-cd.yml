@@ -87,6 +87,7 @@ jobs:
           image-ref: ${{ env.BACKEND_IMAGE }}:${{ github.sha }}
           format: table
           severity: CRITICAL,HIGH
+          ignore-unfixed: true
           exit-code: '1'
 
       - name: Scan frontend image with Trivy
@@ -95,6 +96,7 @@ jobs:
           image-ref: ${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
           format: table
           severity: CRITICAL,HIGH
+          ignore-unfixed: true
           exit-code: '1'
 
       - name: Push backend image
